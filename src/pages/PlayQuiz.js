@@ -10,6 +10,7 @@ const PlayQuiz = () => {
     const [showAnswer, setShowAnswer] = useState(false);
     const [endQuiz, setEndQuiz] = useState(false);
 
+    // quiz id from the url
     const { id } = useParams();
 
     // gets quiz by id on page load
@@ -49,6 +50,7 @@ const PlayQuiz = () => {
         }, 1500);
     }
 
+    // only render nav bar and loading message until quiz has been found from database
     if(isLoading){
         return (
             <>

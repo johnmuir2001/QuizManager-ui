@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Nav from "../components/Nav";
-import { Play } from "../components/buttons";
+import { Play, View } from "../components/buttons";
 
 const Home = () => {
     const [allQuizzes, setAllQuizzes] = useState([]);
@@ -20,20 +20,23 @@ const Home = () => {
     return (
         <>
             <Nav />
-            <h1>Home</h1>
-            {isLoading
-                ? <p>Quizzes Loading...</p>
-                : allQuizzes.map((quiz, index) => {
-                    return(
-                        <div key={index}>
-                            <h3>{quiz.title}</h3>
-                            <div>
-                                <Play quizId={quiz._id}/>
+            <div>
+                <h1>Home</h1>
+                {isLoading
+                    ? <p>Quizzes Loading...</p>
+                    : allQuizzes.map((quiz, index) => {
+                        return(
+                            <div key={index}>
+                                <h3>{quiz.title}</h3>
+                                <div>
+                                    <Play quizId={quiz._id}/>
+                                    <View quizId={quiz._id} roles={["Admin", "SuperAdmin"]}/>
+                                </div>
                             </div>
-                        </div>
-                    )}
-                )
-            }
+                        )}
+                    )
+                }
+            </div>
         </>
     )
 }
