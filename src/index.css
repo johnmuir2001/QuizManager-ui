@@ -7,6 +7,10 @@
   --light-gray: #dedede;
   --blue: #3892E3;
   --blue-hover:#48a8fc;
+  --green: #79CF19;
+  --green-hover:#82e215;
+  --turq: #3BE0C2;
+  --turq-hover:#34f0cd;
 }
 
 body {

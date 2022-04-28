@@ -14,7 +14,7 @@ const Nav = () => {
         <NavWrap>
             <h1>WebbiSkools</h1>
             <NavButtons>
-                <Link to="/">Home</Link>
+                <StyleLink to="/">Home</StyleLink>
                 <button onClick={handleLogOut}>Log Out</button>
             </NavButtons>
         </NavWrap>
@@ -40,5 +40,25 @@ const NavWrap = styled.nav`
 const NavButtons = styled.div`
     button {
         padding: 15px 50px;
+        background-color: var(--dark-gray);
+        font-size: 16px;
+
+        &:hover {
+            background-color: var(--med-gray)
+        }
+    }
+`;
+
+const StyleLink = styled(Link)`
+    text-decoration: none;
+    padding: 15px 50px;
+    background-color: var(--dark-gray);
+    font-size: 16px;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: var(--med-gray)
     }
 `;
