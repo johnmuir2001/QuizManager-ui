@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Nav = () => {
     const navigate = useNavigate();
 
+    // log out removes token and role from local storage and redirects to log in page
     const handleLogOut = () => {
         localStorage.removeItem("currentUser");
         navigate("/login")

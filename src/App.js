@@ -5,22 +5,32 @@ import Home from "./pages/Home";
 import PlayQuiz from "./pages/PlayQuiz";
 import ViewQuiz from "./pages/ViewQuiz";
 import EditQuiz from "./pages/EditQuiz";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/login" element={ <Login />} />
       <Route path="/" element={
-        <Home />
+        <PrivateRoute>
+          <Home />
+        </PrivateRoute>
       }/>
       <Route path="/playQuiz" element={
-        <PlayQuiz />
+        <PrivateRoute>
+          <PlayQuiz />
+        </PrivateRoute>
+        
       }/>
       <Route path="/viewQuiz" element={
-        <ViewQuiz />
+        <PrivateRoute roles={["Admin", "SuperAdmin"]}>
+          <ViewQuiz />
+        </PrivateRoute>
       }/>
       <Route path="/editQuiz" element={
-        <EditQuiz />
+        <PrivateRoute roles={["SuperAdmin"]}>
+          <EditQuiz />
+        </PrivateRoute>
       }/>
     </Routes>
   );
