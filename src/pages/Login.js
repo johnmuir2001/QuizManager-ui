@@ -33,15 +33,69 @@ const Login = () => {
     }
     return (
         <>
-            <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} autoComplete="on" required/>
-                <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} autoComplete="on" required/>
-                <p>{errMessage}</p>
-                <button type="submit">Log In</button>
-            </form>
+            <Header>
+                <h1>WebbiSkools</h1>
+            </Header>
+            <LoginWrap>
+                <h1>Log In</h1>
+                <LoginForm onSubmit={handleSubmit}>
+                    <input type="text" placeholder="Username" onChange={e => setUsername(e.target.value)} autoComplete="on" required/>
+                    <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} autoComplete="on" required/>
+                    <p>{errMessage}</p>
+                    <button type="submit">Log In</button>
+                </LoginForm>
+            </LoginWrap>
         </>
     )
 }
 
 export default Login;
+
+const Header = styled.nav`
+    background-color: var(--dark-gray);
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    height: 70px;
+
+    h1 {
+        color: white;
+        font-size: 30px;
+    }
+`;
+
+const LoginWrap = styled.div`
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const LoginForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+        width: 300px;
+        font-size: 15px;
+        padding: 10px 20px;
+        margin: 10px;
+        border-radius: 5px;
+        border: 1px solid var(--light-gray);
+    }
+
+    p {
+        margin: 0 0 10px 0;
+        height: 20px;
+        color: red;
+    }
+
+    button {
+        background-color: var(--blue);
+
+        &:hover {
+            background-color: var(--blue-hover);
+        }
+    }
+`;
