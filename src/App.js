@@ -26,7 +26,7 @@ const App = () => {
           <ViewQuiz />
         </PrivateRoute>
       }/>
-      <Route path="/editQuiz" element={
+      <Route path="/editQuiz/:id" element={
         <PrivateRoute roles={["SuperAdmin"]}>
           <EditQuiz />
         </PrivateRoute>

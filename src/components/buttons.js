@@ -16,3 +16,12 @@ export const View = ({ quizId, roles }) => {
         )
     }
 }
+
+export const Edit = ({ quizId, roles }) => {
+    // only render Edit button if users role is in allowed roles in this case "SuperAdmin"
+    if(roles && roles.indexOf(JSON.parse(localStorage.getItem("currentUser")).role) !== -1){
+        return (
+            <Link to={`/editQuiz/${quizId}`}>Edit</Link>
+        )
+    }
+}

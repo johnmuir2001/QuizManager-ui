@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Nav from "../components/Nav";
-import { Play, View } from "../components/buttons";
+import { Play, View, Edit } from "../components/buttons";
 
 const Home = () => {
     const [allQuizzes, setAllQuizzes] = useState([]);
@@ -31,6 +31,7 @@ const Home = () => {
                                 <div>
                                     <Play quizId={quiz._id}/>
                                     <View quizId={quiz._id} roles={["Admin", "SuperAdmin"]}/>
+                                    <Edit quizId={quiz._id} roles={["SuperAdmin"]}/>
                                 </div>
                             </div>
                         )}
