@@ -6,6 +6,7 @@ const Home = () => {
     const [allQuizzes, setAllQuizzes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // gets all quizzes on page load
     useEffect(() => {
         const fetchData = async () => {
             const quizzes = await fetch("http://localhost:4000/quiz/");
