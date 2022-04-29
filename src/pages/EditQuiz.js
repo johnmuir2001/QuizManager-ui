@@ -6,8 +6,10 @@ import styled from "styled-components";
 const EditQuiz = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [quizTitle, setQuizTitle] = useState("");
+    const [quizStats, setQuizStats] = useState({})
     const [quizQuestions, setQuizQuestions] = useState([]);
     const [quizAnswers, setQuizAnswers] = useState([]);
+    const [questionStats, setQuestionStats] = useState([]);
 
     const navigate = useNavigate();
 
@@ -22,9 +24,11 @@ const EditQuiz = () => {
 
             // populate state with quiz data from fetch request
             setQuizTitle(quiz.title);
+            setQuizStats(quiz.stats);
             for(let i = 0; i < quiz.questions.length; i++){
-                setQuizQuestions(oldArr => [...oldArr, quiz.questions[i].questionText])
-                setQuizAnswers(oldArr => [...oldArr, quiz.questions[i].answerOptions])
+                setQuizQuestions(oldArr => [...oldArr, quiz.questions[i].questionText]);
+                setQuizAnswers(oldArr => [...oldArr, quiz.questions[i].answerOptions]);
+                setQuestionStats(oldArr => [...oldArr, quiz.questions[i].stats]);
             }
             setIsLoading(false);
         }
@@ -57,6 +61,10 @@ const EditQuiz = () => {
 
     // delete question and answer from state values using index of clicked button
     const handleDeletQuestion = (index) => {
+        let updatedStats = [...questionStats];
+        updatedStats.splice(index, 1);
+        setQuestionStats(updatedStats);
+
         let updatedQuestions = [...quizQuestions];
         updatedQuestions.splice(index, 1);
         setQuizQuestions(updatedQuestions);
@@ -68,6 +76,13 @@ const EditQuiz = () => {
 
     // add question and answers to corresponding state values
     const handleAddQuestion = () => {
+        let updatedStats = [...questionStats];
+        updatedStats.push({
+            totalRight: 0,
+            totalWrong: 0
+        });
+        setQuestionStats(updatedStats);
+
         let updatedQuestions = [...quizQuestions];
         updatedQuestions.push("QUESTION");
         setQuizQuestions(updatedQuestions)
@@ -86,13 +101,15 @@ const EditQuiz = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // format state values into one object that is the same format as the quiz schema
-        let updatedQuiz = {title: quizTitle, questions: []};
+        let updatedQuiz = {title: quizTitle, questions: [], stats: quizStats};
         for (let i = 0; i < quizQuestions.length; i++) {
             updatedQuiz.questions.push({
                 questionText: quizQuestions[i],
-                answerOptions: quizAnswers[i]
+                answerOptions: quizAnswers[i],
+                stats: questionStats[i]
             });
         }
+        updatedQuiz.stats.totalQuestions = updatedQuiz.questions.length;
 
         try {
             const editQuiz = await fetch(
@@ -140,7 +157,14 @@ const EditQuiz = () => {
                     {quizQuestions.map((question, index) => {
                         return (
                             <QuestionCard key={index}>
-                                <h4>Question {index + 1}</h4>
+                                <QuestionInfo>
+                                    <h4>Question {index + 1}</h4>
+                                    {(questionStats[index].totalRight === 0 && questionStats[index].totalWrong === 0) ? (
+                                        <h4>No has answered this question yet</h4>
+                                    ) : (
+                                        <h4>{(questionStats[index].totalRight/(questionStats[index].totalRight + questionStats[index].totalWrong)) * 100}% answered correctly</h4>
+                                    )}
+                                </QuestionInfo>
                                 <QuestionTitle value={question} onChange={e => handleQuestionChange(index, e)}/>
                                 <h4>Answers</h4>
                                 <AnswerWrap>
@@ -169,15 +193,6 @@ export default EditQuiz;
 
 const PageWrap = styled.div`
     margin: 50px;
-
-    h4 {
-        color: var(--text-gray);
-        font-weight: 400;
-        font-size: 13px;
-        margin: 0;
-        border-bottom: 1px solid var(--text-gray);
-        max-width: 740px;
-    }
 `;
 
 const QuizTitle = styled.input`
@@ -192,6 +207,17 @@ const QuestionCard = styled.div`
     margin: 10px 0;
     border-radius: 10px;
 
+    h4 {
+        margin: 0;
+        font-weight: 400;
+        color: var(--text-gray);
+        font-size: 13px;
+    }
+ 
+    & > h4 {
+        border-bottom: 1px solid var(--text-gray);
+    }
+
     button {
         background-color: var(--red);
 
@@ -199,6 +225,12 @@ const QuestionCard = styled.div`
             background-color: var(--red-hover);
         }
     }
+`;
+
+const QuestionInfo = styled.div`
+    border-bottom: 1px solid var(--text-gray);
+    display: flex;
+    justify-content: space-between;
 `;
 
 const QuestionTitle = styled.input`

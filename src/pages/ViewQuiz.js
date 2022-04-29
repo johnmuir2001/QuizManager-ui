@@ -41,7 +41,14 @@ const ViewQuiz = () => {
                     {currentQuiz.questions.map((question, index) => {
                         return (
                             <QuestionCard key={index}>
-                                <h4>Question {index + 1}</h4>
+                                <QuestionInfo>
+                                    <h4>Question {index + 1}</h4>
+                                    {(question.stats.totalRight === 0 && question.stats.totalWrong === 0) ? (
+                                        <h4>No has answered this question yet</h4>
+                                    ) : (
+                                        <h4>{(question.stats.totalRight/(question.stats.totalRight + question.stats.totalWrong)) * 100}% answered correctly</h4>
+                                    )}
+                                </QuestionInfo>
                                 <h3>{question.questionText}</h3>
                                 <h4>Answers</h4>
                                 <AnswerWrap>
@@ -81,11 +88,27 @@ const QuestionCard = styled.div`
     }
 
     h4 {
-        color: var(--text-gray);
-        font-weight: 400;
-        font-size: 13px;
         margin: 0;
+        font-weight: 400;
+        color: var(--text-gray);
+        font-size: 13px;
+    }
+ 
+    & > h4 {
         border-bottom: 1px solid var(--text-gray);
+    }
+`;
+
+const QuestionInfo = styled.div`
+    color: var(--text-gray);
+    font-size: 13px;
+    border-bottom: 1px solid var(--text-gray);
+    display: flex;
+    justify-content: space-between;
+
+    h4 {
+        margin: 0;
+        font-weight: 400;
     }
 `;
 

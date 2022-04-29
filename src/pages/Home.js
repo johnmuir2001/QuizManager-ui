@@ -30,11 +30,16 @@ const Home = () => {
                             return(
                                 <QuizCard key={index}>
                                     <h3>{quiz.title}</h3>
-                                    <div>
+                                    <StatWrap>
+                                        <p>{quiz.stats.plays} plays</p>
+                                        <p>{quiz.stats.totalQuestions} questions</p>
+                                    </StatWrap>
+                                    
+                                    <ButtonWrap>
                                         <Play quizId={quiz._id}/>
                                         <View quizId={quiz._id} roles={["Admin", "SuperAdmin"]}/>
                                         <Edit quizId={quiz._id} roles={["SuperAdmin"]}/>
-                                    </div>
+                                    </ButtonWrap>
                                 </QuizCard>
                             )}
                         )
@@ -74,13 +79,25 @@ const QuizCard = styled.div`
         margin: 0;
         color: white;
     }
+`;
 
-    div {
-        background-color: var(--dark-gray);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+const StatWrap = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: var(--text-gray);
+
+    p {
+        margin: 3px 10px;
+        color: white;
+        font-size: 13px;
     }
+`;
+
+const ButtonWrap = styled.div`
+    background-color: var(--dark-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 `;

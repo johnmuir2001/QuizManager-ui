@@ -25,19 +25,70 @@ const PlayQuiz = () => {
         fetchData();
     }, [id])
 
+    // update quiz stats
+    const updateQuizStats = async () => {
+        try {
+            const editQuiz = await fetch(
+                `http://localhost:4000/quiz/updateQuizStat/${currentQuiz._id}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("currentUser")).token}`
+                    }
+                }
+            )
+            const response = await editQuiz.json();
+            // if error message from server, display the message or go back to home page if successful
+            if(response.message){
+                alert(response.message);
+            }
+        } catch (error) {
+            alert(error)
+        }
+    }
+
     // when user answers the question
-    const handleAnswerClick = (isCorrect, e) => {
+    const handleAnswerClick = async (isCorrect, e) => {
+        let stats = {
+            totalRight: currentQuiz.questions[currentQuestion].stats.totalRight,
+            totalWrong: currentQuiz.questions[currentQuestion].stats.totalWrong
+        }
         // add 1 to score if they are correct
         if(isCorrect){
             setScore(score + 1);
+            stats.totalRight++
+        } else {
+            stats.totalWrong++
         }
         // show answer and set selected answer to red, correct answer changes to green due to inline button style which will override the red style changed here
         e.target.style.backgroundColor = "var(--red)";
         e.target.style.color = "white";
         setShowAnswer(true);
 
+        try {
+            const editQuiz = await fetch(
+                `http://localhost:4000/quiz/updateQuestionStat/${currentQuiz.questions[currentQuestion]._id}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("currentUser")).token}`
+                    },
+                    body: JSON.stringify(stats)
+                }
+            )
+            const response = await editQuiz.json();
+            // if error message from server, display the message or go back to home page if successful
+            if(response.message){
+                alert(response.message);
+            }
+        } catch (error) {
+            alert(error)
+        }
+
         // after 1.5s do this
-        setTimeout(() => {
+        setTimeout(async () => {
             // reset answer button colour and see what next question is
             e.target.style.backgroundColor = "";
             e.target.style.color = "";
@@ -49,6 +100,7 @@ const PlayQuiz = () => {
                 setCurrentQuestion(nextQuestion);
             } else {
                 setEndQuiz(true);
+                updateQuizStats()
             }
         }, 1500);
     }
