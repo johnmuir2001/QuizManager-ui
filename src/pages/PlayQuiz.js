@@ -32,7 +32,7 @@ const PlayQuiz = () => {
             setScore(score + 1);
         }
         // show answer and set selected answer to red, correct answer changes to green due to inline button style which will override the red style changed here
-        e.target.style.backgroundColor = "#e80000";
+        e.target.style.backgroundColor = "var(--red)";
         e.target.style.color = "white";
         setShowAnswer(true);
 
@@ -81,7 +81,10 @@ const PlayQuiz = () => {
                         <AnswerWrap>
                             {currentQuiz.questions[currentQuestion].answerOptions.map((answer, index) => {
                                 return (
-                                    <AnswerButton key={index} style={{backgroundColor: showAnswer && answer.isCorrect ? "#79CF19" : ""}} onClick={e => handleAnswerClick(answer.isCorrect, e)} disabled={showAnswer}>{answer.answerText}</AnswerButton>
+                                    <AnswerButton key={index} style={{
+                                        backgroundColor: showAnswer && answer.isCorrect ? "var(--green)" : "", 
+                                        color: showAnswer && answer.isCorrect ? "white" : ""
+                                    }} onClick={e => handleAnswerClick(answer.isCorrect, e)} disabled={showAnswer}>{answer.answerText}</AnswerButton>
                                 )
                             })}
                         </AnswerWrap>

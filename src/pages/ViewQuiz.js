@@ -34,37 +34,74 @@ const ViewQuiz = () => {
     return (
         <>
             <Nav />
-            <div>
+            <PageWrap>
                 <h1>View Quiz</h1>
                 <h2>{currentQuiz.title}</h2>
                 <div>
                     {currentQuiz.questions.map((question, index) => {
                         return (
-                            <div key={index}>
+                            <QuestionCard key={index}>
                                 <h4>Question</h4>
                                 <h3>{question.questionText}</h3>
                                 <h4>Answers</h4>
-                                <div>
+                                <AnswerWrap>
                                     {question.answerOptions.map((answer, ansIndex) => {
                                         return (
-                                            <div key={ansIndex}>
-                                                <AnswerBall style={{backgroundColor: answer.isCorrect ? "#79CF19" : "#e80000"}}></AnswerBall>
+                                            <AnswerOptionWrap key={ansIndex}>
+                                                <AnswerBall style={{backgroundColor: answer.isCorrect ? "var(--green)" : "var(--red)"}}></AnswerBall>
                                                 <p>{answer.answerText}</p>
-                                            </div>
+                                            </AnswerOptionWrap>
                                         )
                                     })}
-                                </div>
-                            </div>
+                                </AnswerWrap>
+                            </QuestionCard>
                         )
                     })}
                 </div>
-            </div>
+            </PageWrap>
         </>
     )
 }
 
 export default ViewQuiz;
 
+const PageWrap = styled.div`
+    margin: 50px;
+`;
+
+const QuestionCard = styled.div`
+    background-color: var(--very-light-gray);
+    width: 700px;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+
+    h3 {
+        margin: 10px 0;
+    }
+
+    h4 {
+        color: var(--text-gray);
+        font-weight: 400;
+        margin: 0;
+        border-bottom: 1px solid var(--text-gray);
+    }
+`;
+
+const AnswerWrap = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
+const AnswerOptionWrap = styled.div`
+    display: flex;
+    align-items: center;
+    width: 50%;
+
+    p {
+        margin: 5px 10px;
+    }
+`;
 
 const AnswerBall = styled.div`
     height: 10px;

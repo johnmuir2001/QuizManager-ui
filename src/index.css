@@ -4,6 +4,7 @@
 :root{
   --dark-gray: #1a1a1a;
   --med-gray: #454545;
+  --text-gray: #707070;
   --light-gray: #dedede;
   --very-light-gray: #f5f5f5;
   --blue: #3892E3;
@@ -12,6 +13,7 @@
   --green-hover:#82e215;
   --turq: #3BE0C2;
   --turq-hover:#34f0cd;
+  --red: #E80000;
 }
 
 body {
