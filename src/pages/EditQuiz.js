@@ -140,7 +140,7 @@ const EditQuiz = () => {
                     {quizQuestions.map((question, index) => {
                         return (
                             <QuestionCard key={index}>
-                                <h4>Question</h4>
+                                <h4>Question {index + 1}</h4>
                                 <QuestionTitle value={question} onChange={e => handleQuestionChange(index, e)}/>
                                 <h4>Answers</h4>
                                 <AnswerWrap>
@@ -203,11 +203,6 @@ const QuestionCard = styled.div`
 
 const QuestionTitle = styled.input`
     width: 100%;
-    box-sizing: border-box;
-    margin: 10px 0;
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: 1px solid var(--light-gray);
 `;
 
 const AnswerWrap = styled.div`

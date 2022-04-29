@@ -36,12 +36,12 @@ const ViewQuiz = () => {
             <Nav />
             <PageWrap>
                 <h1>View Quiz</h1>
-                <h2>{currentQuiz.title}</h2>
+                <h2>{currentQuiz.title} - {currentQuiz.questions.length} questions</h2>
                 <div>
                     {currentQuiz.questions.map((question, index) => {
                         return (
                             <QuestionCard key={index}>
-                                <h4>Question</h4>
+                                <h4>Question {index + 1}</h4>
                                 <h3>{question.questionText}</h3>
                                 <h4>Answers</h4>
                                 <AnswerWrap>

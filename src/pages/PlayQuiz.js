@@ -75,7 +75,10 @@ const PlayQuiz = () => {
                 </ScoreWrap>
             ) : (
                 <QuizWrap>
-                    <h1>{currentQuiz.title}</h1>
+                    <h1>{currentQuiz.title} - {currentQuestion + 1}/{currentQuiz.questions.length}</h1>
+                    <ProgressBarWrap>
+                        <ProgressBar style={{width: `${((currentQuestion + 1)/currentQuiz.questions.length) * 100}%`}}></ProgressBar>
+                    </ProgressBarWrap>
                     <QuestionWrap>
                         <h2>{currentQuiz.questions[currentQuestion].questionText}</h2>
                         <AnswerWrap>
@@ -99,6 +102,10 @@ export default PlayQuiz;
 
 const QuizWrap = styled.div`
     margin: 50px;
+
+    h1 {
+        margin: 0;
+    }
 `;
 
 const QuestionWrap = styled.div`
@@ -120,6 +127,19 @@ const QuestionWrap = styled.div`
         align-items: center;
         text-align: center;
     }
+`;
+
+const ProgressBarWrap = styled.div`
+    height: 10px;
+    background-color: var(--very-light-gray);
+    border-radius: 5px;
+    margin: 5px 0;
+`;
+
+const ProgressBar = styled.div`
+    background-color: var(--blue);
+    border-radius: 5px;
+    height: 10px;
 `;
 
 const AnswerWrap = styled.div`
