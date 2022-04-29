@@ -23,21 +23,23 @@ const Home = () => {
             <Nav />
             <PageWrap>
                 <h1>Quizzes</h1>
-                {isLoading
-                    ? <p>Quizzes Loading...</p>
-                    : allQuizzes.map((quiz, index) => {
-                        return(
-                            <QuizCard key={index}>
-                                <h3>{quiz.title}</h3>
-                                <div>
-                                    <Play quizId={quiz._id}/>
-                                    <View quizId={quiz._id} roles={["Admin", "SuperAdmin"]}/>
-                                    <Edit quizId={quiz._id} roles={["SuperAdmin"]}/>
-                                </div>
-                            </QuizCard>
-                        )}
-                    )
-                }
+                <QuizWrap>
+                    {isLoading
+                        ? <p>Quizzes Loading...</p>
+                        : allQuizzes.map((quiz, index) => {
+                            return(
+                                <QuizCard key={index}>
+                                    <h3>{quiz.title}</h3>
+                                    <div>
+                                        <Play quizId={quiz._id}/>
+                                        <View quizId={quiz._id} roles={["Admin", "SuperAdmin"]}/>
+                                        <Edit quizId={quiz._id} roles={["SuperAdmin"]}/>
+                                    </div>
+                                </QuizCard>
+                            )}
+                        )
+                    }
+                </QuizWrap>
             </PageWrap>
         </>
     )
@@ -49,8 +51,14 @@ const PageWrap = styled.div`
     margin: 50px;
 `;
 
+const QuizWrap = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
 const QuizCard = styled.div`
     width: 400px;
+    margin: 10px;
 
     h3 {
         border-top-left-radius: 10px;

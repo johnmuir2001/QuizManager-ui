@@ -14,6 +14,7 @@
   --turq: #3BE0C2;
   --turq-hover:#34f0cd;
   --red: #E80000;
+  --red-hover: #fc4848;
 }
 
 body {
@@ -25,6 +26,7 @@ body {
 button, input {
   font-family: 'Montserrat', sans-serif;
 }
+
 button {
   color: white;
   font-weight: 700;
@@ -32,4 +34,12 @@ button {
   border: none;
   border-radius: 5px;
   padding: 10px 25px;
+}
+
+input {
+  box-sizing: border-box;
+  margin: 10px 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--light-gray);
 }

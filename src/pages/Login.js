@@ -81,8 +81,6 @@ const LoginForm = styled.form`
         font-size: 15px;
         padding: 10px 20px;
         margin: 10px;
-        border-radius: 5px;
-        border: 1px solid var(--light-gray);
     }
 
     p {

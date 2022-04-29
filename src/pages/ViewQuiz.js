@@ -83,6 +83,7 @@ const QuestionCard = styled.div`
     h4 {
         color: var(--text-gray);
         font-weight: 400;
+        font-size: 13px;
         margin: 0;
         border-bottom: 1px solid var(--text-gray);
     }
