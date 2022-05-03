@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export const Play = ({ quizId }) => {
@@ -53,6 +53,7 @@ export const Delete = ({ fetchData, quizId, roles }) => {
 }
 
 export const AddQuizButton = ({ fetchData, roles }) => {
+    const navigate = useNavigate();
 
     const handleAddQuiz = async () => {
         const addQuiz = await fetch(
@@ -65,7 +66,17 @@ export const AddQuizButton = ({ fetchData, roles }) => {
                 },
                 body: JSON.stringify({
                     title: "Untitled Quiz",
-                    questions: []
+                    questions: [
+                        {
+                            questionText: "QUESTION",
+                            answerOptions: [
+                                { answerText: "ANSWER", isCorrect: true },
+                                { answerText: "ANSWER" },
+                                { answerText: "ANSWER" },
+                                { answerText: "ANSWER" }
+                            ]
+                        }
+                    ]
                 })
             }
         )
@@ -74,7 +85,8 @@ export const AddQuizButton = ({ fetchData, roles }) => {
         if(response.message){
             alert(response.message);
         }
-        fetchData();
+        await fetchData();
+        navigate(`/editQuiz/${response._id}`);
     }
 
     if(roles && roles.indexOf(JSON.parse(localStorage.getItem("currentUser")).role) !== -1){
