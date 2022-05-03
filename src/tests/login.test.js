@@ -18,17 +18,47 @@ describe('Login In Inputs', () => {
     });
 
     it('should render log in page', () => {
-        const heading = screen.getAllByText("Log In");
-        expect(heading).toHaveLength(2);
+        const heading = screen.getByText("Log In");
+        expect(heading).toBeInTheDocument();
     });
 
     it('should display required fields if input is empty', async () => {
         fireEvent.input(screen.getByPlaceholderText("Password"), {
             target: {
-                value: "user"
+                value: "wrong"
             }
         })
-        fireEvent.click(screen.getByRole("button", { name: "Log In" }))
-        expect(await screen.getByText("Username or Password is incorrect")).toBeInTheDocument();
+        fireEvent.input(screen.getByPlaceholderText("Username"), {
+            target: {
+                value: "wrong"
+            }
+        })
+        fireEvent.click(screen.getByText("LOG IN"));
+        setTimeout(async () => {
+            expect(await screen.getByText("Username or Password is incorrect")).toBeInTheDocument();
+        }, 1000);
+    });
+
+    it("shouldnt display error message if input fields are empty", async () => {
+        fireEvent.click(screen.getByText("LOG IN"));
+        setTimeout(async () => {
+            expect(await screen.getByText("Username or Password is incorrect")).toBeNull();
+        }, 1000);
+    });
+
+    it("should redirect to home on correct login", async () => {
+        const history = createMemoryHistory();
+        fireEvent.input(screen.getByPlaceholderText("Password"), {
+            target: {
+                value: "restricted"
+            }
+        })
+        fireEvent.input(screen.getByPlaceholderText("Username"), {
+            target: {
+                value: "restricted"
+            }
+        })
+        fireEvent.click(screen.getByText("LOG IN"));
+        expect(history.location.pathname).toEqual("/")
     });
 });
