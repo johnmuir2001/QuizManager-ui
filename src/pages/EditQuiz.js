@@ -162,7 +162,7 @@ const EditQuiz = () => {
                                     {(questionStats[index].totalRight === 0 && questionStats[index].totalWrong === 0) ? (
                                         <h4>No has answered this question yet</h4>
                                     ) : (
-                                        <h4>{(questionStats[index].totalRight/(questionStats[index].totalRight + questionStats[index].totalWrong)) * 100}% answered correctly</h4>
+                                        <h4>{Math.round((questionStats[index].totalRight/(questionStats[index].totalRight + questionStats[index].totalWrong)) * 100)}% answered correctly</h4>
                                     )}
                                 </QuestionInfo>
                                 <QuestionTitle value={question} onChange={e => handleQuestionChange(index, e)}/>
