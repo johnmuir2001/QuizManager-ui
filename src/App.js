@@ -22,12 +22,12 @@ const App = () => {
         </PrivateRoute>
       }/>
       <Route path="/viewQuiz/:id" element={
-        <PrivateRoute roles={["Admin", "SuperAdmin"]}>
+        <PrivateRoute roles={["View", "Edit"]}>
           <ViewQuiz />
         </PrivateRoute>
       }/>
       <Route path="/editQuiz/:id" element={
-        <PrivateRoute roles={["SuperAdmin"]}>
+        <PrivateRoute roles={["Edit"]}>
           <EditQuiz />
         </PrivateRoute>
       }/>

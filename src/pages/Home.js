@@ -38,15 +38,15 @@ const Home = () => {
                                     
                                     <ButtonWrap>
                                         <Play quizId={quiz._id}/>
-                                        <View quizId={quiz._id} roles={["Admin", "SuperAdmin"]}/>
-                                        <Edit quizId={quiz._id} roles={["SuperAdmin"]}/>
-                                        <Delete fetchData={fetchData} quizId={quiz._id} roles={["SuperAdmin"]}/>
+                                        <View quizId={quiz._id} roles={["View", "Edit"]}/>
+                                        <Edit quizId={quiz._id} roles={["Edit"]}/>
+                                        <Delete fetchData={fetchData} quizId={quiz._id} roles={["Edit"]}/>
                                     </ButtonWrap>
                                 </QuizCard>
                             )}
                         )
                     }
-                    <AddQuizButton fetchData={fetchData} roles={["SuperAdmin"]} />
+                    <AddQuizButton fetchData={fetchData} roles={["Edit"]} />
                 </QuizWrap>
             </PageWrap>
         </>
