@@ -193,6 +193,12 @@ export default EditQuiz;
 
 const PageWrap = styled.div`
     margin: 50px;
+
+    h4 {
+        margin: 0;
+        color: black;
+        font-size: 16px;
+    }
 `;
 
 const QuizTitle = styled.input`

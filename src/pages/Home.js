@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
 import Nav from "../components/Nav";
-import { Play, View, Edit } from "../components/buttons";
+import { Play, View, Edit, Delete, AddQuizButton } from "../components/buttons";
 import styled from "styled-components";
 
 const Home = () => {
     const [allQuizzes, setAllQuizzes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const fetchData = async () => {
+        const quizzes = await fetch("http://localhost:4000/quiz/");
+        const allQuizzes = await quizzes.json();
+        setAllQuizzes(allQuizzes);
+    }
+
     // gets all quizzes on page load
     useEffect(() => {
-        const fetchData = async () => {
-            const quizzes = await fetch("http://localhost:4000/quiz/");
-            const allQuizzes = await quizzes.json();
-            setAllQuizzes(allQuizzes);
-        }
         fetchData();
         setIsLoading(false);
     }, [])
@@ -39,11 +40,13 @@ const Home = () => {
                                         <Play quizId={quiz._id}/>
                                         <View quizId={quiz._id} roles={["Admin", "SuperAdmin"]}/>
                                         <Edit quizId={quiz._id} roles={["SuperAdmin"]}/>
+                                        <Delete fetchData={fetchData} quizId={quiz._id} roles={["SuperAdmin"]}/>
                                     </ButtonWrap>
                                 </QuizCard>
                             )}
                         )
                     }
+                    <AddQuizButton fetchData={fetchData} roles={["SuperAdmin"]} />
                 </QuizWrap>
             </PageWrap>
         </>
