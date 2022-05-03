@@ -66,6 +66,7 @@ export const AddQuizButton = ({ fetchData, roles }) => {
                 },
                 body: JSON.stringify({
                     title: "Untitled Quiz",
+                    stats: { totalQuestions: 1 },
                     questions: [
                         {
                             questionText: "QUESTION",
