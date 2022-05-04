@@ -44,7 +44,7 @@ const ViewQuiz = () => {
                                 <QuestionInfo>
                                     <h4>Question {index + 1}</h4>
                                     {(question.stats.totalRight === 0 && question.stats.totalWrong === 0) ? (
-                                        <h4>No has answered this question yet</h4>
+                                        <h4>No one has answered this question yet</h4>
                                     ) : (
                                         <h4>{Math.round((question.stats.totalRight/(question.stats.totalRight + question.stats.totalWrong)) * 100)}% answered correctly</h4>
                                     )}
