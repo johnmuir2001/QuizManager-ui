@@ -12,7 +12,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const login = await fetch(
-            "http://localhost:4000/users/authenticate",
+            "https://epa-quiz-manager-api.herokuapp.com/users/authenticate",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -44,6 +44,23 @@ const Login = () => {
                     <p>{errMessage}</p>
                     <button type="submit">LOG IN</button>
                 </LoginForm>
+                <LoginCredentials>
+                    <fieldset>
+                        <legend>Basic User:</legend>
+                        <p><b>U:</b> user</p>
+                        <p><b>P:</b> user</p>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Admin:</legend>
+                        <p><b>U:</b> admin</p>
+                        <p><b>P:</b> admin</p>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Super Admin:</legend>
+                        <p><b>U:</b> N/A</p>
+                        <p><b>P:</b> N/A</p>
+                    </fieldset>
+                </LoginCredentials>
             </LoginWrap>
         </>
     )
@@ -95,5 +112,24 @@ const LoginForm = styled.form`
         &:hover {
             background-color: var(--blue-hover);
         }
+    }
+`;
+
+const LoginCredentials = styled.div`
+    background-color: #87cfff;
+    border: 2px solid var(--blue);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 10px;
+
+    fieldset {
+        width: 130px;
+        margin: 5px;
+    }
+    
+    p {
+        margin: 7px 10px;
     }
 `;

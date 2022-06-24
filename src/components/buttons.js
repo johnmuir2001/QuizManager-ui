@@ -29,7 +29,7 @@ export const Edit = ({ quizId, roles }) => {
 export const Delete = ({ fetchData, quizId, roles }) => {
     const handleDeleteQuiz = async () => {
         const deleteQuiz = await fetch(
-            `http://localhost:4000/quiz/delete/${quizId}`,
+            `https://epa-quiz-manager-api.herokuapp.com/quiz/delete/${quizId}`,
             {
                 method: "DELETE",
                 headers: {
@@ -57,7 +57,7 @@ export const AddQuizButton = ({ fetchData, roles }) => {
 
     const handleAddQuiz = async () => {
         const addQuiz = await fetch(
-            `http://localhost:4000/quiz/addQuiz`,
+            `https://epa-quiz-manager-api.herokuapp.com/quiz/addQuiz`,
             {
                 method: "POST",
                 headers: {
