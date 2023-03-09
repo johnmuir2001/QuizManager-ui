@@ -13,7 +13,7 @@ const ViewQuiz = () => {
     // gets quiz by id on page load
     useEffect(() => {
         const fetchData = async () => {
-            const fetchQuiz = await fetch(`https://epa-quiz-manager-api.herokuapp.com/quiz/${id}`);
+            const fetchQuiz = await fetch(`https://quiz-manager-api.onrender.com/quiz/${id}`);
             const quiz = await fetchQuiz.json();
             setCurrentQuiz(quiz)
             setIsLoading(false);

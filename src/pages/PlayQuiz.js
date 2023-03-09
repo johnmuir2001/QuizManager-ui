@@ -17,7 +17,7 @@ const PlayQuiz = () => {
     // gets quiz by id on page load
     useEffect(() => {
         const fetchData = async () => {
-            const fetchQuiz = await fetch(`https://epa-quiz-manager-api.herokuapp.com/quiz/${id}`);
+            const fetchQuiz = await fetch(`https://quiz-manager-api.onrender.com/quiz/${id}`);
             const quiz = await fetchQuiz.json();
             setCurrentQuiz(quiz);
             setIsLoading(false);
@@ -29,7 +29,7 @@ const PlayQuiz = () => {
     const updateQuizStats = async () => {
         try {
             const editQuiz = await fetch(
-                `https://epa-quiz-manager-api.herokuapp.com/quiz/updateQuizStat/${currentQuiz._id}`,
+                `https://quiz-manager-api.onrender.com/quiz/updateQuizStat/${currentQuiz._id}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -68,7 +68,7 @@ const PlayQuiz = () => {
 
         try {
             const editQuiz = await fetch(
-                `https://epa-quiz-manager-api.herokuapp.com/quiz/updateQuestionStat/${currentQuiz.questions[currentQuestion]._id}`,
+                `https://quiz-manager-api.onrender.com/quiz/updateQuestionStat/${currentQuiz.questions[currentQuestion]._id}`,
                 {
                     method: "PATCH",
                     headers: {

@@ -12,7 +12,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const login = await fetch(
-            "https://epa-quiz-manager-api.herokuapp.com/users/authenticate",
+            "https://quiz-manager-api.onrender.com/users/authenticate",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

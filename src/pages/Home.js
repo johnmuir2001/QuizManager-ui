@@ -8,7 +8,7 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchData = async () => {
-        const quizzes = await fetch("https://epa-quiz-manager-api.herokuapp.com/quiz/");
+        const quizzes = await fetch("https://quiz-manager-api.onrender.com/quiz/");
         const allQuizzes = await quizzes.json();
         setAllQuizzes(allQuizzes);
     }
