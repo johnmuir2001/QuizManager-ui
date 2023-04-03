@@ -12,3 +12,9 @@ A basic user can; play all the quizzes, see your score, see stats about each qui
 
 ### Admin
 An admin has all the permissions and features as a basic user but can also view the quiz questions and answers (correct and incorrect). These also shows how many people answered each question correctly.
+
+
+## Backend
+The backend API was built using Node.js, Express.js, and MongoDB. You can have a look at the source code for the API on the lin below
+
+<https://github.com/johnmuir2001/QuizManager-api>
