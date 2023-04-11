@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect }  from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -8,6 +8,11 @@ import EditQuiz from "./pages/EditQuiz";
 import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
+
+  useEffect(() => {
+    localStorage.setItem("currentUser", JSON.stringify({ role: "Restricted" }))
+  }, [])
+
   return (
     <Routes>
       <Route path="/login" element={ <Login />} />

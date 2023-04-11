@@ -89,7 +89,7 @@ export const AddQuizButton = ({ fetchData, roles }) => {
         await fetchData();
         navigate(`/editQuiz/${response._id}`);
     }
-
+    
     if(roles && roles.indexOf(JSON.parse(localStorage.getItem("currentUser")).role) !== -1){
         return (
             <AddButton onClick={handleAddQuiz} title="Add Quiz">+ Add New Quiz</AddButton>

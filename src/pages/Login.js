@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Login = () => {
@@ -27,7 +27,7 @@ const Login = () => {
             setErrMessage(user.message)
         }
         if(user.token){
-            localStorage.setItem("currentUser", JSON.stringify({ token: user.token, role: user.role }))
+            await localStorage.setItem("currentUser", JSON.stringify({ token: user.token, role: user.role }))
             navigate("/")
         }
     }
@@ -35,6 +35,7 @@ const Login = () => {
         <>
             <Header>
                 <h1>WebbiSkools</h1>
+                <StyleLink to="/">Home</StyleLink>
             </Header>
             <LoginWrap>
                 <h1>Log In</h1>
@@ -45,11 +46,6 @@ const Login = () => {
                     <button type="submit">LOG IN</button>
                 </LoginForm>
                 <LoginCredentials>
-                    <fieldset>
-                        <legend>Basic User:</legend>
-                        <p><b>U:</b> user</p>
-                        <p><b>P:</b> user</p>
-                    </fieldset>
                     <fieldset>
                         <legend>Admin:</legend>
                         <p><b>U:</b> admin</p>
@@ -72,6 +68,7 @@ const Header = styled.nav`
     background-color: var(--dark-gray);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 50px;
     height: 70px;
 
@@ -131,5 +128,19 @@ const LoginCredentials = styled.div`
     
     p {
         margin: 7px 10px;
+    }
+`;
+
+const StyleLink = styled(Link)`
+    text-decoration: none;
+    padding: 15px 50px;
+    background-color: var(--dark-gray);
+    font-size: 16px;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: var(--med-gray)
     }
 `;

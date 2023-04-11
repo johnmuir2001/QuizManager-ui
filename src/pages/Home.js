@@ -19,15 +19,20 @@ const Home = () => {
         setIsLoading(false);
     }, [])
 
+    if(isLoading) {
+        return (
+            <h1>Loading...</h1>
+        )
+    }
+
     return (
         <>
             <Nav />
             <PageWrap>
                 <h1>Quizzes</h1>
                 <QuizWrap>
-                    {isLoading
-                        ? <p>Quizzes Loading...</p>
-                        : allQuizzes.map((quiz, index) => {
+                    {
+                        allQuizzes.map((quiz, index) => {
                             return(
                                 <QuizCard key={index}>
                                     <h3>{quiz.title}</h3>

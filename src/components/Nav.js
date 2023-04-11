@@ -1,21 +1,37 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Nav = () => {
+    const [loggedIn, setLoggedIn] = useState(false)
     const navigate = useNavigate();
 
     // log out removes token and role from local storage and redirects to log in page
-    const handleLogOut = () => {
-        localStorage.removeItem("currentUser");
+    const handleLogOut = async () => {
+        await localStorage.setItem("currentUser", JSON.stringify({ role: "Restricted" }))
         navigate("/login")
     }
+
+    const checkLoggedIn = async () => {
+        (JSON.parse(localStorage.getItem("currentUser")).token === undefined) ? setLoggedIn(false) : setLoggedIn(true)
+    }
+
+    useEffect(() => {
+        checkLoggedIn()
+    }, [])
 
     return (
         <NavWrap>
             <h1>WebbiSkools</h1>
             <NavButtons>
                 <StyleLink to="/">Home</StyleLink>
-                <button onClick={handleLogOut}>Log Out</button>
+
+                {/* <button onClick={checkLoggedIn}>Check</button> */}
+                {(loggedIn) ? (
+                    <button onClick={handleLogOut}>Log Out</button>
+                ) : (
+                    <StyleLink to="/login">Log In</StyleLink>
+                )}
             </NavButtons>
         </NavWrap>
     )
